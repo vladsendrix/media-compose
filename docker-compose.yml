@@ -2,13 +2,17 @@ version: "3.9"
 name: media
 services:
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: qbittorrentofficial/qbittorrent-nox:latest
     container_name: qbittorrent
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Bucharest
-      - WEBUI_PORT=8080
+      - QBT_EULA=accept
+      - QBT_VERSION=latest
+      - QBT_WEBUI_PORT=8080
+      - QBT_CONFIG_PATH=/config
+      - QBT_DOWNLOADS_PATH=/downloads
     volumes:
       - /home/vlad/docker/configs/qbittorrent:/config
       - /mnt/storage/downloads:/downloads
@@ -20,7 +24,7 @@ services:
 
   radarr:
     container_name: radarr
-    image: lscr.io/linuxserver/radarr:latest
+    image: lscr.io/linuxserver/radarr:develop
     environment:
       - PUID=1000
       - PGID=1000
@@ -33,7 +37,7 @@ services:
     restart: unless-stopped
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
+    image: lscr.io/linuxserver/sonarr:develop
     container_name: sonarr
     environment:
       - PUID=1000
