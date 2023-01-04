@@ -10,8 +10,8 @@ services:
       - TZ=Europe/Bucharest
       - WEBUI_PORT=8080
     volumes:
-      - qbittorrent-config:/config
-      - qbittorrent-downloads:/downloads
+      - /home/vlad/docker/configs/qbittorrent:/config
+      - /mnt/storage/downloads:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -28,8 +28,8 @@ services:
     ports:
       - 7878:7878
     volumes:
-      - radarr-config:/config
-      - qbittorrent-downloads:/downloads
+      - /home/vlad/docker/configs/radarr:/config
+      - /mnt/storage/downloads:/downloads
     restart: unless-stopped
 
   sonarr:
@@ -40,8 +40,8 @@ services:
       - PGID=1000
       - TZ=Europe/Bucharest
     volumes:
-      - sonarr-config:/config
-      - qbittorrent-downloads:/downloads
+      - /home/vlad/docker/configs/sonarr:/config
+      - /mnt/storage/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -56,7 +56,7 @@ services:
       - AUTO_UPDATE=true #optional
       # - RUN_OPTS=<run options here> #optional
     volumes:
-      - jackett-config:/config
+      - /home/vlad/docker/configs/jackett:/config
       #- jackett-blackhole:/downloads
     ports:
       - 9117:9117
@@ -70,8 +70,9 @@ services:
       - PGID=1000
       - TZ=Europe/Bucharest
     volumes:
-      - jellyfin-config:/config
-      - qbittorrent-downloads:/data
+      - /home/vlad/docker/configs/jellyfin:/config
+      - /mnt/storage/downloads/movies:/movies
+      - /mnt/storage/downloads/shows:/shows
     ports:
       - 8096:8096
       - 8920:8920 #optional
@@ -88,16 +89,5 @@ services:
     ports:
       - 5055:5055
     volumes:
-      - jellyseerr-config:/app/config
+      - /home/vlad/docker/configs/jellyseerr:/app/config
     restart: unless-stopped
-
-volumes:
-  qbittorrent-config:
-  qbittorrent-downloads:
-  radarr-config:
-  sonarr-config:
-  jackett-config:
-  jackett-blackhole:
-  jellyfin-config:
-  jellyseerr-config:
-  
