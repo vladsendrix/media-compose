@@ -50,6 +50,21 @@ services:
       - 8989:8989
     restart: unless-stopped
 
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:development
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Bucharest
+    volumes:
+      - /home/vlad/docker/configs/bazarr:/config
+      - /mnt/storage/downloads/movies:/movies
+      - /mnt/storage/downloads/shows:/shows
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
   jackett:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
