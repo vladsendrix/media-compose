@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -75,6 +75,7 @@ services:
       - TZ=Europe/Bucharest
     volumes:
       - /home/vlad/docker/configs/jellyfin:/config
+      - /home/vlad/docker/configs/jellyfin-cache:/cache
       - /mnt/storage/downloads/movies:/movies
       - /mnt/storage/downloads/shows:/shows
     ports:
