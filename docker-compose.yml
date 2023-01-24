@@ -34,6 +34,7 @@ services:
     volumes:
       - /home/vlad/docker/configs/radarr:/config
       - /mnt/storage/downloads:/downloads
+      - /mnt/storage/media:/media
     restart: unless-stopped
 
   sonarr:
@@ -46,6 +47,7 @@ services:
     volumes:
       - /home/vlad/docker/configs/sonarr:/config
       - /mnt/storage/downloads:/downloads
+      - /mnt/storage/media:/media
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -58,7 +60,7 @@ services:
       - PGID=1000
       - TZ=Europe/Bucharest
     volumes:
-      - //home/vlad/docker/configs/prowlarr:/config
+      - /home/vlad/docker/configs/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -73,8 +75,7 @@ services:
     volumes:
       - /home/vlad/docker/configs/jellyfin:/config
       - /home/vlad/docker/configs/jellyfin-cache:/cache
-      - /mnt/storage/downloads/movies:/movies
-      - /mnt/storage/downloads/shows:/shows
+      - /mnt/storage/media:/media
     ports:
       - 8096:8096
       - 8920:8920 #optional
