@@ -65,6 +65,15 @@ services:
       - 9696:9696
     restart: unless-stopped
 
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr:edge
+    container_name: recyclarr
+    user: 1000:1000
+    volumes:
+      - /home/vlad/docker/configs/recyclarr/:/config
+    environment:
+      - TZ=Europe/Bucharest
+
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
