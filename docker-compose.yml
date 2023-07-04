@@ -5,17 +5,17 @@ services:
     image: qbittorrentofficial/qbittorrent-nox:latest
     container_name: qbittorrent
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bucharest
+      - PUID=$UID
+      - PGID=$GID
+      - TZ=$TIMEZONE
       - QBT_EULA=accept
       - QBT_VERSION=latest
       - QBT_WEBUI_PORT=8080
       - QBT_CONFIG_PATH=/config
       - QBT_DOWNLOADS_PATH=/downloads
     volumes:
-      - /home/vlad/docker/configs/qbittorrent:/config
-      - /mnt/storage/downloads:/downloads
+      - $CONFIG/qbittorrent:/config
+      - $DATA:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -26,28 +26,28 @@ services:
     container_name: radarr
     image: lscr.io/linuxserver/radarr:develop
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bucharest
+      - PUID=$UID
+      - PGID=$GID
+      - TZ=$TIMEZONE
     ports:
       - 7878:7878
     volumes:
-      - /home/vlad/docker/configs/radarr:/config
-      - /mnt/storage/downloads:/downloads
-      - /mnt/storage/media:/media
+      - $CONFIG/radarr:/config
+      - $DATA:/downloads
+      - $MEDIA:/media
     restart: unless-stopped
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:develop
     container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bucharest
+      - PUID=$UID
+      - PGID=$GID
+      - TZ=$TIMEZONE
     volumes:
-      - /home/vlad/docker/configs/sonarr:/config
-      - /mnt/storage/downloads:/downloads
-      - /mnt/storage/media:/media
+      - $CONFIG/sonarr:/config
+      - $DATA:/downloads
+      - $MEDIA:/media
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -56,11 +56,11 @@ services:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bucharest
+      - PUID=$UID
+      - PGID=$GID
+      - TZ=$TIMEZONE
     volumes:
-      - /home/vlad/docker/configs/prowlarr:/config
+      - $CONFIG/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -68,23 +68,23 @@ services:
   recyclarr:
     image: ghcr.io/recyclarr/recyclarr:edge
     container_name: recyclarr
-    user: 1000:1000
+    user: $UID:$GID
     volumes:
-      - /home/vlad/docker/configs/recyclarr/:/config
+      - $CONFIG/recyclarr/:/config
     environment:
-      - TZ=Europe/Bucharest
+      - TZ=$TIMEZONE
 
   jellyfin:
-    image: jellyfin/jellyfin:latest
+    image: jellyfin/jellyfin:unstable
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bucharest
+      - PUID=$UID
+      - PGID=$GID
+      - TZ=$TIMEZONE
     volumes:
-      - /home/vlad/docker/configs/jellyfin:/config
-      - /home/vlad/docker/configs/jellyfin-cache:/cache
-      - /mnt/storage/media:/media
+      - $CONFIG/jellyfin:/config
+      - $CONFIG/jellyfin-cache:/cache
+      - $MEDIA:/media
     ports:
       - 8096:8096
       - 8920:8920 #optional
@@ -97,9 +97,9 @@ services:
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=debug
-      - TZ=Europe/Bucharest
+      - TZ=$TIMEZONE
     ports:
       - 5055:5055
     volumes:
-      - /home/vlad/docker/configs/jellyseerr:/app/config
+      - $CONFIG/jellyseerr:/app/config
     restart: unless-stopped
