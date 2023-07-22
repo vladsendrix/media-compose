@@ -2,7 +2,7 @@ version: "3.9"
 name: media
 services:
   qbittorrent:
-    image: qbittorrentofficial/qbittorrent-nox:latest
+    image: qbittorrentofficial/qbittorrent-nox
     container_name: qbittorrent
     environment:
       - PUID=$UID
@@ -66,7 +66,7 @@ services:
     restart: unless-stopped
 
   recyclarr:
-    image: ghcr.io/recyclarr/recyclarr:edge
+    image: ghcr.io/recyclarr/recyclarr
     container_name: recyclarr
     user: $UID:$GID
     volumes:
@@ -75,7 +75,7 @@ services:
       - TZ=$TIMEZONE
 
   jellyfin:
-    image: jellyfin/jellyfin:unstable
+    image: jellyfin/jellyfin
     container_name: jellyfin
     environment:
       - PUID=$UID
@@ -96,7 +96,7 @@ services:
     restart: unless-stopped
 
   jellyseerr:
-    image: fallenbagel/jellyseerr:latest
+    image: fallenbagel/jellyseerr
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=debug
