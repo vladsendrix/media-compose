@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to the repository directory
-cd $DOCKER_CONFIG
+cd /home/vlad/docker/configs/
 
 # Get the current date and time
 currentDateTime=$(date +"%Y-%m-%d %T")
