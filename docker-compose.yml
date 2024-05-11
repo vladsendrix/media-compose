@@ -24,7 +24,7 @@ services:
 
   radarr:
     container_name: radarr
-    image: lscr.io/linuxserver/radarr:develop
+    image: lscr.io/linuxserver/radarr
     environment:
       - PUID=$UID
       - PGID=$GID
@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:develop
+    image: lscr.io/linuxserver/sonarr
     container_name: sonarr
     environment:
       - PUID=$UID
@@ -53,7 +53,7 @@ services:
     restart: unless-stopped
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop
+    image: lscr.io/linuxserver/prowlarr
     container_name: prowlarr
     environment:
       - PUID=$UID
