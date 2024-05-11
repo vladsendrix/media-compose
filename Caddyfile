@@ -1,9 +1,11 @@
-{$DOMAIN}
-
-/jellyfin {
+{$DOMAIN} {
+    
+    /jellyfin {
     reverse_proxy jellyfin:8096
-}
+    }
 
-/jellyseerr {
+    /jellyseerr {
     reverse_proxy jellyseerr:5055
+    }
+
 }
