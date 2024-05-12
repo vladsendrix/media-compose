@@ -74,7 +74,7 @@ services:
       - TZ=$TIMEZONE
 
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:10.8.13
     container_name: jellyfin
     environment:
       - PUID=$UID
