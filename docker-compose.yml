@@ -92,6 +92,8 @@ services:
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
+    networks:
+      - caddy_net
     restart: unless-stopped
 
   jellyseerr:
@@ -104,23 +106,10 @@ services:
       - 5055:5055
     volumes:
       - $CONFIG/jellyseerr:/app/config
+    networks:
+      - caddy_net
     restart: unless-stopped
 
-  caddy:
-    image: caddy
-    container_name: caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - $CONFIG/caddy/srv:/srv
-      - $CONFIG/caddy/data:/data
-      - $CONFIG/caddy/config:/config
-    environment:
-      - ACME_AGREE=true
-      - EMAIL=$EMAIL
-      - DOMAIN=$DOMAIN
-      - TZ=$TIMEZONE
+networks:
+  caddy_net:
+    external: true
